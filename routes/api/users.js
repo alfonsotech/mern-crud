@@ -1,7 +1,9 @@
-var router = require('express').Router()
-var userController = require('../../controllers/usersController')
+const router = require("express").Router();
+const resourceController = require("../../controllers/usersController");
 
-// Matches with "/api/users"
-router.route("/")
-  .get(usersController.findAll)
-  .post(usersController.create)
+// Matches with "/api/resources"
+router.route("/resources")
+  .get(resourceController.findAll)
+  .post(resourceController.create);
+
+module.exports = router

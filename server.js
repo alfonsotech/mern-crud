@@ -17,7 +17,8 @@ app.use(routes)
 
 //Mongoose Connection
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/mern-crud')
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/mern-crud")
 
 app.listen(PORT, function() {
   console.log('Listening on port: ' + PORT)

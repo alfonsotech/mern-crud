@@ -1,9 +1,10 @@
 var db = require('../models')
+// console.log(db.User);
 
 module.exports = {
   findAll: function(req, res) {
-    db.User
-      .find({})
+    db
+      .find()
       .then( data => res.json(data))
       .catch(err => res.status(422).json(err))
   },
@@ -14,7 +15,7 @@ module.exports = {
       lastName: req.body.lastName,
       email: req.body.email
     }
-    db.User
+    db
       .create(user)
       .then( data => res.json(data))
       .catch(err => res.status(422).json(err))
