@@ -17,9 +17,14 @@ app.use(routes)
 
 //Mongoose Connection
 mongoose.Promise = global.Promise
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/mern-crud"
-)
+mongoose.connect("mongodb://localhost/mern-crud")
+// mongoose.connect("mongodb://127.0.0.1//mern-crud")
+mongoose.connection.on('connected', function () {
+  console.log('Mongoose default connection open to mongodb://localhost/mern-crud');
+});
+mongoose.connection.on('error',function (err) {
+  console.log('Mongoose default connection error: ' + err);
+});
 
 app.listen(PORT, function() {
   console.log('Listening on port: ' + PORT)

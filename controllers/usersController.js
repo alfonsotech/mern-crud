@@ -1,18 +1,23 @@
 var db = require('../models')
+console.log('db.Users >>>>>>', db.Users)
 
 module.exports = {
   //Find one
   findById: function(req, res) {
-    db.User
+    db.Users
       .findById(req.params.id)
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
   },
   //Find All
   findAll: function(req, res) {
-    db.User
+    console.log('inside findAll func 1');
+    db.Users
       .find({})
-      .then( data => res.json(data))
+      .then( data => {
+        console.log('data fron inside findAll func', data);
+        res.json(data)
+      })
       .catch(err => res.status(422).json(err))
   },
   //Create One
@@ -23,21 +28,21 @@ module.exports = {
       lastName: req.body.lastName,
       email: req.body.email
     }
-    db.User
+    db.Users
       .create(user)
       .then( data => res.json(data))
       .catch(err => res.status(422).json(err))
   },
   //Update a single record
   update: function(req, res) {
-    db.User
+    db.Users
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
   },
   //Delete a record
   remove: function(req, res) {
-    db.User
+    db.Users
       .findById({ _id: req.params.id })
       .then(data => data.remove())
       .then(data => res.json(data))
